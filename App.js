@@ -9,7 +9,45 @@ import firebase from 'react-native-firebase';
 export default class App extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.ref = firebase.firestore().collection('todos');
+    this.state = {
+      TextInput: '',
+    };
+  }
+  updateTextInput(value) {
+    this.setState({ TextInput: value })
+  }
+
+  addTodo() {
+    this.ref.add({
+      title: this.state.TextInput,
+      complete: false,
+    });
+
+    this.setState({
+      TextInput: '',
+    });
+  }
+
+  render() {
+    return (             <View>
+      <ScrollView>
+          <Text> List of TODOs</Text>
+      </ScrollView>
+      <TextInput
+          placeholder={'Add TODO'}
+          value={this.state.TextInput}
+          onChangeText={(text) => this.updateTextInput(text)}
+      />
+      <Button
+          title={'Add TODO'}
+          disabled={!this.state.TextInput.length}
+          onPress={()=>{this.addTodo()}}
+          // disabled = {true}
+          // onPress={()=>{}}
+
+      />
+  </View>);
   }
 
   // async componentDidMount() {

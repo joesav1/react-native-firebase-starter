@@ -15,26 +15,7 @@ class Todos extends React.Component {
         // };
     }
     render() {
-        return (
-            <View>
-                <ScrollView>
-                    <Text> List of TODOs</Text>
-                </ScrollView>
-                <TextInput
-                    placeholder={'Add TODO'}
-                    // value={this.state.TextInput}
-                    // onChangeText={(text) => this.updateTextInput(text)}
-                />
-                <Button
-                    title={'Add TODO'}
-                    // disabled={!this.state.TextInput.length}
-                    // onPress={()=>{this.addTodo()}}
-                    disabled = {true}
-                    onPress={()=>{}}
-
-                />
-            </View>
-        );
+        return null;
     }
 
 }
