@@ -12,7 +12,7 @@ export default class Todo extends React.PureComponent {
             <TouchableHighlight
                 onPress={() => this.toggleComplete()}
             >
-                <View style={{ flex: 1, height: 48, flexDirection: row, alignItems: "center"}}>
+                <View style={{ flex: 1, height: 48, flexDirection: 'row', alignItems: "center"}}>
                     <View style={{ flex: 8}}>
                         <Text>{this.props.title}</Text>
                     </View>

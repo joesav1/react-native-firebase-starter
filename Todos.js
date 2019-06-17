@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'react-native-firebase';
-import { Flatlist, ScrollView, View, Text, TextInput, Button } from 'react-native';
+import { FlatList, ScrollView, View, Text, TextInput, Button } from 'react-native';
 import Todo from './Todo';
 class Todos extends React.Component {
     constructor() {
@@ -15,31 +15,31 @@ class Todos extends React.Component {
         };
       }
 
+      onCollectionUpdate = (querySnapshot) => {
+            const todos = [];
+            querySnapshot.forEach((doc) => {
+                const {title, complete} = doc.data();
+
+                todos.push({
+                    key: doc.id,
+                    doc,
+                    title,
+                    complete,
+                });
+            });
+
+            this.setState({
+                todos,
+                loading: false,
+            });
+        }
+
       componentDidMount() {
           this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
       }
 
       componentWillUnmount() {
           this.unsubscribe();
-      }
-
-      onCollectionUpdate = (querySnapshot) => {
-          const todos = [];
-          querySnapshot.forEach((doc) => {
-              const {title, complete} = doc.data();
-
-              todos.push({
-                  key: doc.id,
-                  doc,
-                  title,
-                  complete,
-              });
-          });
-
-          this.setState({
-              todos,
-              loading: false,
-          });
       }
 
 
@@ -50,7 +50,7 @@ class Todos extends React.Component {
       addTodo() {
         this.ref.add({
           title: this.state.TextInput,
-          complete: false,
+          complete: true,
         });
     
         this.setState({
@@ -59,32 +59,26 @@ class Todos extends React.Component {
       }
     
       render() {
-        if(this.state.loading) {
-            return null;
-        }
 
         return (
-            
-        <View style = {{ flex: 1}}>
-          <Flatlist
-            data={this.state.todos}
-            renderItem={({item}) => <Todo {...item}/>}
-            />
-          <TextInput
-              placeholder={'Add TODO'}
-              value={this.state.TextInput}
-              onChangeText={(text) => this.updateTextInput(text)}
-          />
-          <Button
-              title={'Add TODO'}
-              disabled={!this.state.TextInput.length}
-              onPress={()=>{this.addTodo()}}
-                            
-              // disabled = {true}
-              // onPress={()=>{}}
-    
-          />
-        </View>);
+            <View style={{ flex: 1 }}>
+                <FlatList
+                data={this.state.todos}
+                renderItem={({ item }) => <Todo {...item} />}
+                />
+                <TextInput
+                    placeholder={'Add TODO'}
+                    value={this.state.TextInput}
+                    onChangeText={(text) => this.updateTextInput(text)}
+                />
+                <Button
+                    title={'Add TODO'}
+                    disabled={!this.state.TextInput.length}
+                    onPress={() => this.addTodo()}
+                />
+            </View>     
+
+        );
       }
     
       // async componentDidMount() {
