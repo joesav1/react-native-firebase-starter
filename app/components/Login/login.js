@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from "react-native-firebase";
+import { StackNavigator } from 'react-navigation';
 
+const App = StackNavigator({
+    Home: { screen: HomeScreen },
+    Profile: { screen: ProfileScreen} 
+});
 export class Login extends Component {
     constructor(props) {
         super(props);

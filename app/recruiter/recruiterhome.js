@@ -1,0 +1,26 @@
+import React, { Component } from 'react'
+import { StyleSheet, Platform, Text, View } from 'react-native'
+
+export class RecruiterHome extends Component {
+    state = { currentUser: null }
+    render() {
+        const { currentUser } = this.state
+        return (
+            <View style={styles.container}>
+                <Text>
+                    Hi {currentUser && currentUser.email}!
+                </Text>
+            </View>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  })
+
+export default RecruiterHome
