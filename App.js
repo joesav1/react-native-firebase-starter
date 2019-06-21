@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Platform, Image, Text, Button, TextInput, View, ScrollView } from 'react-native';
 import { AppRegistry } from 'react-native';
 import Todos from './Todos';
-
+import Header from './app/components/Header/index';
+import Login from './app/components/Login/login'
 import firebase from 'react-native-firebase';
 
 
@@ -11,7 +12,11 @@ export default class App extends React.Component {
   render(){
     console.log("JS - testing tingz");
     return(
-      <Todos/>
+      <Login/>
+      // <View>
+      //   <Header/>
+       //<Todos/>
+      // </View>
     );
     
   }
